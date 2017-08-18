@@ -53,7 +53,7 @@ void Image::WritePPM(ostream &out)
 	unsigned ired, igreen, iblue;
 	unsigned char red, green, blue;
 
-	for(i = height-1; i>=0; j--)
+	for(i = height-1; i>=0; i--)
 		for (j = 0; j < width; j++)
 		{
 			ired = (unsigned)(256 * raster[j][i].r);
