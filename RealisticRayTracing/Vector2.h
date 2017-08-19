@@ -5,7 +5,7 @@
 class Vector2
 {
 public:
-	Vector2() { }
+	Vector2() : x(0.f), y(0.f) { }
 	Vector2(float x, float y) : x(x), y(y) { }
 
 	Vector2& operator=(const Vector2 &vec) { x = vec.x; y = vec.y; return *this; }

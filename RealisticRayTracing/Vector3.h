@@ -6,7 +6,7 @@
 class Vector3
 {
 public:
-	Vector3() {}
+	Vector3() : x(0.f), y(0.f), z(0.f) { }
 	Vector3(float e0, float e1, float e2);
 	Vector3(const Vector3 &v) { *this = v; }
 
