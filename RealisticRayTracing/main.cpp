@@ -24,8 +24,8 @@ int main()
 	Image image(500, 500);
 	float tmin;
 	rgb color;
-	Vector2 samples[9];
-	Vector2 sample_lens[9];
+	Vector2 samples[100];
+	Vector2 sample_lens[100];
 
 	for(int i = 0; i<500; i++)
 		for (int j = 0; j < 500; j++)
@@ -41,11 +41,11 @@ int main()
 				//Ray r(Vector3(i+sample.x, j+sample.y, 0), Vector3(0, 0, -1));
 				Ray r = camera.GetRay(double(i + sample.x)/500., double(j + sample.y)/500., sample_lens[a].x, sample_lens[a].y);
 				rgb tempColor;
-				tmin = 5000.f;
+				tmin = 10000.f;
 				for (Shape* shape : s)
 				{
-					shape->Hit(r, 0.1f, 5000.f, 0.f, rec);
-					if (rec.t < tmin) { tmin = rec.t; tempColor = rec.color; }
+					if(shape->Hit(r, 0.1f, tmin, 0.f, rec))
+						if (rec.t < tmin) { tmin = rec.t; tempColor = rec.color; }
 				}
 				color += tempColor;
 				a++;
