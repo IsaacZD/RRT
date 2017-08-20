@@ -5,12 +5,15 @@
 #include "Ray.h"
 #include "Vector3.h"
 #include "rgb.h"
+#include "Texture.h"
 
 struct HitRecord
 {
 	float t;
 	Vector3 normal;
-	rgb color;
+	Vector2 uv;
+	Vector3 pos;
+	Texture *texture;
 };
 
 class Shape
