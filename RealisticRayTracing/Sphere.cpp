@@ -1,7 +1,7 @@
 #include "Sphere.h"
 
-Sphere::Sphere(const Vector3 &center, float radius, const rgb &color)
-	:center(center), radius(radius), color(color)
+Sphere::Sphere(const Vector3 &center, float radius, Texture *texture)
+	:center(center), radius(radius), texture(texture)
 { }
 
 bool Sphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const
@@ -25,8 +25,9 @@ bool Sphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &re
 			return false;
 
 		record.t = t;
+		record.pos = r.o + t*r.d;
 		record.normal = UnitVector(r.o + t*r.d - center);
-		record.color = color;
+		record.texture = texture;
 		return true;
 	}
 	return false;

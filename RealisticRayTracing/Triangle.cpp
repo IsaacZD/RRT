@@ -1,12 +1,12 @@
 #include "Triangle.h"
 
-Triangle::Triangle(const Vector3 &p0, const Vector3 &p1, const Vector3 &p2, const rgb &color)
-	: p0(p0), p1(p1), p2(p2), color(color)
+Triangle::Triangle(const Vector3 &p0, const Vector3 &p1, const Vector3 &p2, Texture *texture)
+	: p0(p0), p1(p1), p2(p2), texture(texture)
 { }
 
 bool Triangle::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const 
 {
-	float tval;
+	float t;
 	float A = p0.x - p1.x;
 	float B = p0.y - p1.y;
 	float C = p0.z - p1.z;
@@ -38,12 +38,13 @@ bool Triangle::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &
 	float gamma = (I*AKJB + H*JCAL + G*BLKC) / denom;
 	if (gamma <= 0.0 || beta + gamma >= 1.0f) return false;
 
-	tval = -(F*AKJB + E*JCAL + D*BLKC) / denom;
-	if (tval >= tmin && tval <= tmax)
+	t= -(F*AKJB + E*JCAL + D*BLKC) / denom;
+	if (t>= tmin && t<= tmax)
 	{
-		record.t = tval;
+		record.t = t;
+		record.pos = r.o + t*r.d;
 		record.normal = UnitVector(Cross((p1 - p0), (p2 - p0)));
-		record.color = color;
+		record.texture = texture;
 		return true;
 	}
 

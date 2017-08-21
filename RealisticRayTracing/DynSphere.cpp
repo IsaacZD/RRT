@@ -1,7 +1,7 @@
 #include "DynSphere.h"
 
-DynSphere::DynSphere(const Vector3 &ocenter, float radius, const rgb &color, float mintime, float maxtime)
-	: ocenter(ocenter), radius(radius), color(color), mintime(mintime), maxtime(maxtime) 
+DynSphere::DynSphere(const Vector3 &ocenter, float radius, Texture *texture, float mintime, float maxtime)
+	: ocenter(ocenter), radius(radius), texture(texture), mintime(mintime), maxtime(maxtime) 
 { }
 
 bool DynSphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const
@@ -26,8 +26,9 @@ bool DynSphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord 
 			return false;
 
 		record.t = t;
+		record.pos = r.o + t*r.d;
 		record.normal = UnitVector(r.o + t*r.d - new_center);
-		record.color = color;
+		record.texture = texture;
 		return true;
 	}
 	return false;
