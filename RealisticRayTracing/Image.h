@@ -17,6 +17,9 @@ public:
 	void GammaCorrect(float gamma);
 	void WritePPM(ostream &out);
 	void ReadPPM(string file_name);
+	int Width() const { return width; }
+	int Height() const { return height; }
+	rgb *const operator[](int i) const { return raster[i]; }
 
 private:
 	rgb** raster;
