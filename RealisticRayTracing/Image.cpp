@@ -74,7 +74,8 @@ void Image::WritePPM(ostream &out)
 void Image::ReadPPM(string file_name)
 {
 	ifstream in;
-	in.open(file_name.c_str());
+	// if open the file without the binary flag, get() will stop at '25' (end of medium)
+	in.open(file_name.c_str(), ios::binary);
 	if (!in.is_open())
 	{
 		cerr << "ERROR -- Counldn't open file \'" << file_name << "\'.\n";
@@ -106,4 +107,5 @@ void Image::ReadPPM(string file_name)
 				(float)((unsigned char)green) / 255.0,
 				(float)((unsigned char)blue) / 255.0);
 		}
+	in.close();
 }

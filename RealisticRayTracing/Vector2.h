@@ -15,5 +15,19 @@ public:
 
 };
 
+inline Vector2 operator-(const Vector2 &lhs, const Vector2 &rhs) { return Vector2(lhs.x-rhs.x, lhs.y-rhs.y); }
+
+inline Vector2 operator+(const Vector2 &lhs, const Vector2 &rhs) { return Vector2(lhs.x + rhs.x, lhs.y + rhs.y); }
+
+inline Vector2 operator*(const Vector2 &v, float s)
+{
+	return Vector2(v.x*s, v.y*s);
+}
+
+inline Vector2 operator*(float s, const Vector2 &v)
+{
+	return Vector2(v.x*s, v.y*s);
+}
+
 #endif // !_VECTOR2_H_
 

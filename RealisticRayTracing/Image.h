@@ -20,6 +20,7 @@ public:
 	int Width() const { return width; }
 	int Height() const { return height; }
 	rgb *const operator[](int i) const { return raster[i]; }
+	rgb *operator[](int i) { return raster[i]; }
 
 private:
 	rgb** raster;
