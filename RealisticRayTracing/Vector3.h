@@ -36,6 +36,8 @@ public:
 	Vector3& operator-=(const Vector3 &v2);
 	Vector3& operator*=(const float t);
 	Vector3& operator/=(const float t);
+	float& operator[](int index) { return e[index]; }
+	float operator[](int index) const { return e[index]; }
 
 public:
 	union {
