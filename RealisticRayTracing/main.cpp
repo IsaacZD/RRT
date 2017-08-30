@@ -13,6 +13,7 @@
 #include "ImageTexture.h"
 #include "UVTriangle.h"
 #include "UVSphere.h"
+#include "Instance.h"
 
 #define OUTPUT_PATH "E:/WorkSpaces/VS2017/test.ppm"
 
@@ -22,13 +23,19 @@ int main()
 	NoiseTexture noiseTex(rgb(1.f, 1.f, 1.f), rgb(0.f, 0.f, .5f), .01f);
 	ImageTexture imageTex("color.ppm");
 
+	UVSphere uvSphere = UVSphere(Vector3(-5, -5, -30), 10, &imageTex);
+	UVTriangle uvTriangle = UVTriangle(Vector3(300, 600, -800), Vector3(0, 100, -1000), Vector3(450, 20, -1000),
+		Vector2(0.0f, 0.0f), Vector2(1.f, 0.f), Vector2(0.f, 1.f), &imageTex);
+	
+	UVSphere test = UVSphere(Vector3(), 10, &imageTex);
+
+	Matrix translate = Translate(-5.f, -5.f, -30.f);
+	Matrix scale = Scale(1.f, 0.5f, 1.f);
+	Matrix rotate = RotateZ(PI / 2);
 
 	Shape* s[]
 	{
-		//new DynSphere(Vector3(0.f, 0.f, -30.f), 15.f, &imageTex, 0.f, 5.f),
-		new UVSphere(Vector3(-5, -5, -30), 10, &imageTex),
-		new UVTriangle(Vector3(300, 600, -800), Vector3(0, 100, -1000), Vector3(450, 20, -1000),
-			Vector2(0.0f, 0.0f), Vector2(1.f, 0.f), Vector2(0.f, 1.f), &imageTex)
+		new Instance(translate*scale, &test)
 	};
 
 	Camera camera(

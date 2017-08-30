@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _SPHERE_H_
-#define _SPHERE_H_
 
 #include "Shape.h"
 #include "Vector3.h"
@@ -14,15 +12,10 @@ public:
 	Sphere(const Vector3 &center, float radius, Texture *texture);
 	bool Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const override;
 	bool ShadowHit(const Ray &r, float tmin, float tmax, float time) const override;
-
+	BBox BoundingBox(float time) const override { return bbox; }
 public:
 	Vector3 center;
 	float radius;
 	Texture *texture;
+	BBox bbox;
 };
-
-
-
-
-#endif // !_SPHERE_H_
-

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _NOISE_TEXTURE_H_
-#define _NOISE_TEXTURE_H_
 
 #include <cmath>
 #include "Texture.h"
@@ -22,8 +20,4 @@ public:
 	rgb c0, c1;
 	SolidNoise solid_noise;
 };
-
-
-
-#endif // !_NOISE_TEXTURE_H_
 

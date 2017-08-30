@@ -1,7 +1,7 @@
 #include "DynSphere.h"
 
 DynSphere::DynSphere(const Vector3 &ocenter, float radius, Texture *texture, float mintime, float maxtime)
-	: ocenter(ocenter), radius(radius), texture(texture), mintime(mintime), maxtime(maxtime) 
+	: ocenter(ocenter), radius(radius), texture(texture), mintime(mintime), maxtime(maxtime)
 { }
 
 bool DynSphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const
@@ -67,4 +67,20 @@ Vector3 DynSphere::GetCenter(float time) const
 		ocenter.x + realtime,
 		ocenter.y + realtime,
 		ocenter.z + realtime);
+}
+
+BBox DynSphere::BoundingBox(float time) const
+{
+	BBox bbox;
+	Vector3 c = GetCenter(time);
+
+	bbox.min.x = c.x - radius;
+	bbox.min.y = c.y - radius;
+	bbox.min.z = c.z - radius;
+
+	bbox.max.x = c.x + radius;
+	bbox.max.y = c.y + radius;
+	bbox.max.z = c.z + radius;
+
+	return bbox;
 }

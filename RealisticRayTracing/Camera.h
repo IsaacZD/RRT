@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
 
 #include "Ray.h"
 #include "ONB.h"
@@ -40,9 +38,4 @@ public:
 	float u0, u1, v0, v1;
 	float d;
 };
-
-
-
-
-#endif // !_CAMERA_H_
 

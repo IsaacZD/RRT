@@ -228,6 +228,17 @@ Matrix Translate(float x, float y, float z)
 	return ret;
 }
 
+Matrix Scale(float x, float y, float z)
+{
+	Matrix ret = IdentityMatrix();
+
+	ret.mMat[0][0] = x;
+	ret.mMat[1][1] = y;
+	ret.mMat[2][2] = z;
+
+	return ret;
+}
+
 Matrix RotateX(float angle)
 {
 	Matrix ret = IdentityMatrix();
@@ -342,6 +353,16 @@ Matrix operator-(const Matrix &lhs, const Matrix &rhs)
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 4; j++)
 			ret.mMat[i][j] = lhs.mMat[i][j] - rhs.mMat[i][j];
+
+	return ret;
+}
+
+Matrix operator+(const Matrix &lhs, const Matrix &rhs)
+{
+	Matrix ret;
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
+			ret.mMat[i][j] = lhs.mMat[i][j] + rhs.mMat[i][j];
 
 	return ret;
 }

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _MARBLE_TEXTURE_H_
-#define _MARBLE_TEXTURE_H_
 
 #include <cmath>
 #include "Texture.h"
@@ -28,7 +26,3 @@ public:
 	rgb c0, c1, c2;
 	SolidNoise noise;
 };
-
-
-#endif // !_MARBLE_TEXTURE_H_
-

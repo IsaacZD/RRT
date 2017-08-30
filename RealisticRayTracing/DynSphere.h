@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _DYN_SPHERE_H_
-#define _DYN_SPHERE_H_
 
 #include "Shape.h"
 #include "Vector3.h"
@@ -15,8 +13,7 @@ public:
 	bool Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const;
 	bool ShadowHit(const Ray &r, float tmin, float tmax, float time) const;
 	Vector3 GetCenter(float time) const;
-
-
+	BBox BoundingBox(float time) const override;
 public:
 	Vector3 ocenter;
 	float mintime;
@@ -24,9 +21,3 @@ public:
 	float radius;
 	Texture *texture;
 };
-
-
-
-
-#endif // !_DYN_SPHERE_H_
-

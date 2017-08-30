@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _SOLID_NOISE_H_
-#define _SOLID_NOISE_H_
 
 #include <cmath>
 #include "Vector3.h"
@@ -49,6 +47,3 @@ inline int SolidNoise::IntGamma(int i, int j) const
 	idx = phi[abs(i + idx) % 16];
 	return idx;
 }
-
-#endif // !_SOLID_NOISE_H_
-

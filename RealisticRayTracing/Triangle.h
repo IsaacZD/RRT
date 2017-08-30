@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TRIANGLE_H_
-#define _TRIANGLE_H_
 
 #include "Shape.h"
 #include "Vector3.h"
@@ -14,13 +12,9 @@ public:
 	Triangle(const Vector3 &p0, const Vector3 &p1, const Vector3 &p2, Texture *texture);
 	bool Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const override;
 	bool ShadowHit(const Ray &r, float tmin, float tmax, float time) const override;
-
+	BBox BoundingBox(float time) const override { return bbox; }
 public:
 	Vector3 p0, p1, p2;
 	Texture *texture;
+	BBox bbox;
 };
-
-
-
-#endif // !_TRIANGLE_H_
-

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _DYNARRAY_H_
-#define _DYNARRAY_H_
 
 template<typename T>
 class DynArray
@@ -68,6 +66,3 @@ bool DynArray<T>::Append(T item)
 	data[nData++] = item;
 	return true;
 }
-
-
-#endif

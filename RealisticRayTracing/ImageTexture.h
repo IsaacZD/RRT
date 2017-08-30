@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _IMAGE_TEXTURE_H_
-#define _IMAGE_TEXTURE_H_
 
 #include "Texture.h"
 #include "Image.h"
@@ -14,6 +12,4 @@ public:
 public:
 	Image *image;
 };
-
-#endif // !_IMAGE_TEXTURE_H_
 

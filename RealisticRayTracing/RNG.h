@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _RNG_H_
-#define _RNG_H_
 
 class RNG
 {
@@ -24,6 +22,3 @@ inline float RNG::operator()()
 	seed *= mult;
 	return float(seed%llong_max) / float_max;
 }
-
-
-#endif

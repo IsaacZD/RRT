@@ -2,7 +2,15 @@
 
 Sphere::Sphere(const Vector3 &center, float radius, Texture *texture)
 	:center(center), radius(radius), texture(texture)
-{ }
+{
+	bbox.min.x = center.x - radius;
+	bbox.min.y = center.y - radius;
+	bbox.min.z = center.z - radius;
+
+	bbox.max.x = center.x + radius;
+	bbox.max.y = center.y + radius;
+	bbox.max.z = center.z + radius;
+}
 
 bool Sphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const
 {

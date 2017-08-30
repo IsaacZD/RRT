@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _SIMPLE_TEXTURE_H_
-#define _SIMPLE_TEXTURE_H_
 
 #include "Texture.h"
 
@@ -13,7 +11,4 @@ public:
 public:
 	rgb color;
 };
-
-
-#endif // !_SIMPLE_TEXTURE_H_
 

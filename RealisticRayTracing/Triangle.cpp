@@ -2,7 +2,15 @@
 
 Triangle::Triangle(const Vector3 &p0, const Vector3 &p1, const Vector3 &p2, Texture *texture)
 	: p0(p0), p1(p1), p2(p2), texture(texture)
-{ }
+{
+	bbox.min.x = fmin(fmin(p0.x, p1.x), p2.x);
+	bbox.min.y = fmin(fmin(p0.y, p1.y), p2.y);
+	bbox.min.z = fmin(fmin(p0.z, p1.z), p2.z);
+
+	bbox.max.x = fmax(fmax(p0.x, p1.x), p2.x);
+	bbox.max.y = fmax(fmax(p0.y, p1.y), p2.y);
+	bbox.max.z = fmax(fmax(p0.z, p1.z), p2.z);
+}
 
 bool Triangle::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const 
 {

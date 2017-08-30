@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _VERTEX_H_
-#define _VERTEX_H_
 
 #include "Vector2.h"
 #include "Vector3.h"
@@ -23,6 +21,3 @@ struct VertexUVN
 	Vector3 normal;
 	Vector2 uv;
 };
-
-#endif // !_VERTEX_H_
-

@@ -29,7 +29,7 @@ public:
 	friend Matrix operator*(float lhs, const Matrix &rhs);
 
 	friend Vector3 TransformLoc(const Matrix &lhs, const Vector3 &rhs);
-	friend Vector3 TransfromVec(const Matrix &lhs, const Vector3 &rhs);
+	friend Vector3 TransformVec(const Matrix &lhs, const Vector3 &rhs);
 	
 	friend Matrix ZeroMatrix();
 	friend Matrix IdentityMatrix();

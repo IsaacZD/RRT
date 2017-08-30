@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _VECTOR2_H_
-#define _VECTOR2_H_
 
 class Vector2
 {
@@ -28,6 +26,3 @@ inline Vector2 operator*(float s, const Vector2 &v)
 {
 	return Vector2(v.x*s, v.y*s);
 }
-
-#endif // !_VECTOR2_H_
-

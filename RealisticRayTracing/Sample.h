@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _SAMPLE_H_
-#define _SAMPLE_H_
 
 #include <cmath>
 
@@ -46,7 +44,3 @@ inline float CubicFilter(float x)
 		return 1.0f - Solve(24.0f*(23.0f / 24.0f - x) / 11.0f);
 	else return 2 - pow(24.0f*(1.0f - x), 0.25f);
 }
-
-
-#endif // !_SAMPLE_H_
-
