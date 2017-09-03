@@ -2,16 +2,16 @@
 
 #include "Vertex.h"
 #include "Shape.h"
-#include "Texture.h"
+#include "Material.h"
 
 class Mesh
 {
 public:
 	Mesh() { }
 	~Mesh() { }
-	Texture* GetTexture() const { return tex; }
+	Material* GetMaterial() const { return material; }
 public:
-	Texture *tex;
+	Material *material;
 	Vector3 *verts;
 	VertexUV *vertUVs;
 	VertexN *vertNs;

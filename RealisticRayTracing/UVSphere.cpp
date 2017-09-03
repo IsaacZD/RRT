@@ -1,7 +1,7 @@
 #include "UVSphere.h"
 
-UVSphere::UVSphere(const Vector3 &center, float radius, Texture *tex)
-	:center(center), radius(radius), tex(tex)
+UVSphere::UVSphere(const Vector3 &center, float radius, Material *material)
+	:center(center), radius(radius), material(material)
 {
 	bbox.min.x = center.x - radius;
 	bbox.min.y = center.y - radius;
@@ -33,7 +33,9 @@ bool UVSphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &
 
 		rec.t = t;
 		rec.pos = r.o + t*r.d;
-		Vector3 n = rec.normal = (rec.pos - center) / radius;
+		Vector3 n = /*rec.normal =*/ (rec.pos - center) / radius;
+		rec.uvw.InitFromW(n);
+
 		
 		float twopi = 6.28318530718f;
 		float pi = 3.1415926535f;
@@ -45,7 +47,7 @@ bool UVSphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &
 		float one_over_pi = .318309886184f;
 		rec.uv = Vector2(phi*one_over_2pi, (pi - theta)*one_over_pi);
 
-		rec.texture = tex;
+		rec.material = material;
 		return true;
 	}
 	return false;

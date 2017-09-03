@@ -3,18 +3,20 @@
 #include "Ray.h"
 #include "Vector3.h"
 #include "rgb.h"
-#include "Texture.h"
+#include "Material.h"
 #include "BBox.h"
+#include "ONB.h"
 
 struct HitRecord
 {
 	float t;
-	Vector3 normal;
-	Vector2 uv;
 	Vector3 pos;
-	Texture *texture;
-	//ONB uvw;
+	Vector3 tex_pos;
+	ONB uvw;			// w is the outward normal
+	Vector2 uv;
+	Material *material;
 };
+
 
 class Shape
 {

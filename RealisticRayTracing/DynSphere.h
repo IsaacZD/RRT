@@ -4,12 +4,12 @@
 #include "Vector3.h"
 #include "Ray.h"
 #include "rgb.h"
-#include "Texture.h"
+#include "Material.h"
 
 class DynSphere : public Shape
 {
 public:
-	DynSphere(const Vector3 &ocenter, float radius, Texture *texture, float mintime, float maxtime);
+	DynSphere(const Vector3 &ocenter, float radius, Material *material, float mintime, float maxtime);
 	bool Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &record) const;
 	bool ShadowHit(const Ray &r, float tmin, float tmax, float time) const;
 	Vector3 GetCenter(float time) const;
@@ -19,5 +19,5 @@ public:
 	float mintime;
 	float maxtime;
 	float radius;
-	Texture *texture;
+	Material *material;
 };

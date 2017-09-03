@@ -16,9 +16,12 @@
 #include "Instance.h"
 
 #define OUTPUT_PATH "E:/WorkSpaces/VS2017/test.ppm"
+#define CANEXCUTE false
 
 int main()
 {
+#if CANEXCUTE
+
 	MarbleTexture marbleTex(.05f);
 	NoiseTexture noiseTex(rgb(1.f, 1.f, 1.f), rgb(0.f, 0.f, .5f), .01f);
 	ImageTexture imageTex("color.ppm");
@@ -89,6 +92,8 @@ int main()
 	std::ofstream of(OUTPUT_PATH, ios::binary);
 	image.WritePPM(of);
 	of.close();
+
+#endif
 
 	return 0;
 }

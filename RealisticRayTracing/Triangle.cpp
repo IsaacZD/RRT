@@ -1,7 +1,7 @@
 #include "Triangle.h"
 
-Triangle::Triangle(const Vector3 &p0, const Vector3 &p1, const Vector3 &p2, Texture *texture)
-	: p0(p0), p1(p1), p2(p2), texture(texture)
+Triangle::Triangle(const Vector3 &p0, const Vector3 &p1, const Vector3 &p2, Material *material)
+	: p0(p0), p1(p1), p2(p2), material(material)
 {
 	bbox.min.x = fmin(fmin(p0.x, p1.x), p2.x);
 	bbox.min.y = fmin(fmin(p0.y, p1.y), p2.y);
@@ -51,8 +51,9 @@ bool Triangle::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &
 	{
 		record.t = t;
 		record.pos = r.o + t*r.d;
-		record.normal = UnitVector(Cross((p1 - p0), (p2 - p0)));
-		record.texture = texture;
+		//record.normal = UnitVector(Cross((p1 - p0), (p2 - p0)));
+		record.uvw.InitFromW(Cross(p1 - p0, p2 - p0));
+		record.material = material;
 		return true;
 	}
 

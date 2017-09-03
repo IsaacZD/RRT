@@ -1,7 +1,7 @@
 #include "Sphere.h"
 
-Sphere::Sphere(const Vector3 &center, float radius, Texture *texture)
-	:center(center), radius(radius), texture(texture)
+Sphere::Sphere(const Vector3 &center, float radius, Material *material)
+	:center(center), radius(radius), material(material)
 {
 	bbox.min.x = center.x - radius;
 	bbox.min.y = center.y - radius;
@@ -34,8 +34,9 @@ bool Sphere::Hit(const Ray &r, float tmin, float tmax, float time, HitRecord &re
 
 		record.t = t;
 		record.pos = r.o + t*r.d;
-		record.normal = UnitVector(r.o + t*r.d - center);
-		record.texture = texture;
+		//record.normal = UnitVector(r.o + t*r.d - center);
+		record.uvw.InitFromW(r.o + t*r.d - center);
+		record.material = material;
 		return true;
 	}
 	return false;

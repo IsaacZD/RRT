@@ -59,9 +59,10 @@ bool MeshTriangleUV::Hit(const Ray &r, float tmin, float tmax, float time, HitRe
 		Vector2 u1(mesh_ptr->vertUVs[p[1]].uv);
 		Vector2 u2(mesh_ptr->vertUVs[p[2]].uv);
 		rec.uv = Vector2(alpha*u0.x + beta*u1.x + gamma*u2.x, alpha*u0.y + beta*u1.y + gamma*u2.y);
-		rec.texture = mesh_ptr->GetTexture();
+		rec.material = mesh_ptr->GetMaterial();
 		rec.t = t;
-		rec.normal = UnitVector(Cross(p1 - p0, p2 - p0));
+		//rec.normal = UnitVector(Cross(p1 - p0, p2 - p0));
+		rec.uvw.InitFromW(Cross(p1 - p0, p2 - p0));
 
 		return true;
 	}
