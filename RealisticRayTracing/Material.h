@@ -57,6 +57,17 @@ public:
 		return false;
 	}
 
+	virtual bool ScatterDirection(const Vector3 &,	// incident Vector
+		const HitRecord &,							// hit we are shading
+		Vector2 &,									// random seed
+		rgb &,										// color to attenuate by
+		bool &,										// count emitted light?
+		float &,									// brdf scale
+		Vector3 &)									// scattered direction
+	{
+		return false;
+	}
+
 	virtual bool TransmissionDirection(const ONB &,	// ONB of hit point
 		const Vector3 &,							// incident unit vector
 		const Vector3 &,							// Texture point
