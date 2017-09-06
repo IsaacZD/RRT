@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vector2.h"
+#include "Shape.h"
 #include "Ray.h"
 #include "rgb.h"
 #include "ONB.h"

@@ -261,6 +261,11 @@ inline Vector3 UnitVector(const Vector3 &vec)
 	return (vec / vec.Length());
 }
 
+inline Vector3 Reflect(const Vector3 in, const Vector3 normal)
+{
+	return in - 2 * Dot(in, normal)/normal.Length()*normal;
+}
+
 std::istream& operator>>(std::istream &is, Vector3 &t);
 
 std::ostream& operator<<(std::ostream &os, const Vector3 &t);

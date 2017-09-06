@@ -2,10 +2,12 @@
 
 #include "Ray.h"
 #include "Vector3.h"
+#include "Vector2.h"
 #include "rgb.h"
-#include "Material.h"
 #include "BBox.h"
 #include "ONB.h"
+
+class Material;
 
 struct HitRecord
 {
