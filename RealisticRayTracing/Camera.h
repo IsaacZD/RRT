@@ -22,7 +22,7 @@ public:
 		up = (v1 - v0)*uvw.v;
 	}
 
-	Ray GetRay(float a, float b, float xi1, float xi2) // a,b是像素坐标，xi1,xi2是棱镜上的坐标 [0,1]
+	Ray GetRay(float a, float b, float xi1, float xi2) const // a,b是像素坐标，xi1,xi2是棱镜上的坐标 [0,1]
 	{
 		Vector3 origin = center + 2.0f*(xi1 - 0.5f)*lens_radius*uvw.u + 2.0f*(xi2 - 0.5f)*lens_radius*uvw.v;
 		Vector3 target = corner + across*a + up*b;
@@ -35,7 +35,7 @@ public:
 	Vector3 center, corner, across, up; // corner左下角顶点 across向右的边向量
 	ONB uvw;
 	float lens_radius;
-	float u0, u1, v0, v1;
+	int u0, u1, v0, v1;
 	float d;
 };
 

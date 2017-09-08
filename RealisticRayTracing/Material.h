@@ -13,7 +13,7 @@ public:
 	virtual rgb EmittedRadiance(const ONB &,		// ONB of hit point
 		const Vector3 &,							// outgoing direction from light
 		const Vector3 &,							// Texture point
-		const Vector3 &)							// Texture coordinate
+		const Vector2 &)							// Texture coordinate
 	{
 		return rgb(0.f, 0.f, 0.f);
 	}

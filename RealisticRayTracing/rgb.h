@@ -6,6 +6,7 @@ class rgb
 {
 public:
 	rgb() : r(0.f), g(0.f), b(0.f) { }
+	rgb(float intensity) : r(intensity), g(intensity), b(intensity) { }
 	rgb(float r, float g, float b) : r(r), g(g), b(b) { }
 	rgb(const rgb &original) : r(original.r), g(original.g), b(original.b) { }
 

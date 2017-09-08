@@ -1,13 +1,21 @@
 #include "Mesh.h"
 #include "MeshTriangle.h"
 
-MeshTriangleUV::MeshTriangleUV()
-{ }
-
 MeshTriangleUV::MeshTriangleUV(Mesh *mesh, int p0, int p1, int p2, int index)
 	: mesh_ptr(mesh)
 {
 	p[0] = p0; p[1] = p1; p[2] = p2;
+	Vector3 &pp0 = mesh_ptr->vertUVs[p0].vertex;
+	Vector3 &pp1 = mesh_ptr->vertUVs[p1].vertex;
+	Vector3 &pp2 = mesh_ptr->vertUVs[p2].vertex;
+
+	bbox.min.x = fmin(fmin(pp0.x, pp1.x), pp2.x);
+	bbox.min.y = fmin(fmin(pp0.y, pp1.y), pp2.y);
+	bbox.min.z = fmin(fmin(pp0.z, pp1.z), pp2.z);
+
+	bbox.max.x = fmax(fmax(pp0.x, pp1.x), pp2.x);
+	bbox.max.y = fmax(fmax(pp0.y, pp1.y), pp2.y);
+	bbox.max.z = fmax(fmax(pp0.z, pp1.z), pp2.z);
 }
 
 MeshTriangleUV::~MeshTriangleUV()

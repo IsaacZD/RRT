@@ -13,6 +13,7 @@ public:
 	BBox& operator=(const BBox &b)
 	{
 		min = b.min; max = b.max;
+		return *this;
 	}
 
 public:
