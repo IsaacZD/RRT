@@ -30,10 +30,10 @@ void render(const Camera &camera, int width, const BVH &root, int nsamples, char
 const Vector3 cc(0.f, 0.f, -30.f);
 const float cl= 20.f;
 
-const float intensity = 10.f;
+const float intensity = 1.f;
 const int max_depth = 10;
 
-const int num_samples = 25;
+const int num_samples = 900;
 const int image_size = 500;
 
 int main()
@@ -55,7 +55,6 @@ int main()
 	// would treat the constructor as a declaration. WHY???
 	EmitMaterial em( (rgb(intensity)) );
 
-
 	Mesh mesh;
 	mesh.material = &graym;
 	mesh.vertUVs = new VertexUV[8]{
@@ -71,16 +70,16 @@ int main()
 	};
 
 	Shape *shapes[] = {
-		new Sphere(Vector3(0.f, 0.f, -30.f), 5.f, &em),
-		//new UVSphere(Vector3(0.f, -10.f, -30.f), 10.f, &gm),
+		new Sphere(Vector3(0.f, 10.f, -30.f), 10.f, &em),
+		new UVSphere(Vector3(0.f, -10.f, -30.f), 7.f, &gm),
 		//new Sphere(Vector3(0.f, -50.f, -30.f), 33.f, &bm),
 
 		new MeshTriangleUV(&mesh, 1, 0, 3, 0),
 		new MeshTriangleUV(&mesh, 2, 1, 3, 0),
 		new MeshTriangleUV(&mesh, 5, 1, 2, 0),
 		new MeshTriangleUV(&mesh, 6, 5, 2, 0),
-		new MeshTriangleUV(&mesh, 0, 4, 1, 0),
-		new MeshTriangleUV(&mesh, 4, 5, 1, 0),
+		new MeshTriangleUV(&mesh, 4, 0, 1, 0),
+		new MeshTriangleUV(&mesh, 5, 4, 1, 0),
 		new MeshTriangleUV(&mesh, 3, 0, 4, 0),
 		new MeshTriangleUV(&mesh, 7, 3, 4, 0),
 		new MeshTriangleUV(&mesh, 7, 4, 5, 0),
@@ -89,7 +88,7 @@ int main()
 
 	BVH root(shapes, sizeof(shapes)/sizeof(shapes[0]));
 
-	Camera camera(Vector3(0.f, 0.f, 0.f), Vector3(0.f, 0.f, -1.f), Vector3(0.f, 1.f, 0.f), .1f, -12.f, 12.f, -12.f, 12.f, 15.f);
+	Camera camera(Vector3(0.f, 0.f, -10.f), Vector3(0.f, 0.f, -1.f), Vector3(0.f, 1.f, 0.f), .1f, -20.f, 20.f, -20.f, 20.f, 10.f);
 
 	render(camera, image_size, root, num_samples, OUTPUT_PATH);
 
@@ -138,8 +137,6 @@ void render(const Camera &camera, int image_width, const BVH &root, int nsamples
 			Vector2 *pixel_samples = new Vector2[nsamples];
 			Vector2 *lens_samples = new Vector2[nsamples];
 			rgb color;
-
-			//color.r = color.g = color.b = 0.f;
 			MultiJitter(pixel_samples, nsamples);
 			CubicSplineFilter(pixel_samples, nsamples);
 			Jitter(lens_samples, nsamples);

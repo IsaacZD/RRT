@@ -66,6 +66,7 @@ bool MeshTriangleUV::Hit(const Ray &r, float tmin, float tmax, float time, HitRe
 		Vector2 u0(mesh_ptr->vertUVs[p[0]].uv);
 		Vector2 u1(mesh_ptr->vertUVs[p[1]].uv);
 		Vector2 u2(mesh_ptr->vertUVs[p[2]].uv);
+		rec.pos = r.o + t*r.d;
 		rec.uv = Vector2(alpha*u0.x + beta*u1.x + gamma*u2.x, alpha*u0.y + beta*u1.y + gamma*u2.y);
 		rec.material = mesh_ptr->GetMaterial();
 		rec.t = t;
