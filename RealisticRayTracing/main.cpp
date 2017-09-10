@@ -17,12 +17,13 @@
 #include "DynSphere.h"
 #include "ImageTexture.h"
 #include "UVTriangle.h"
+#include "PhoneMetalMaterial.h"
 #include "UVSphere.h"
 #include "Instance.h"
 #include <ctime>
 #include "BVH.h"
 
-#define OUTPUT_PATH "E:/WorkSpaces/VS2017/test.ppm"
+#define OUTPUT_PATH "E:/WorkSpaces/VS2017/test.png"
 #define CANEXCUTE false
 
 void render(const Camera &camera, int width, const BVH &root, int nsamples, char *path);
@@ -30,26 +31,35 @@ void render(const Camera &camera, int width, const BVH &root, int nsamples, char
 const Vector3 cc(0.f, 0.f, -30.f);
 const float cl= 20.f;
 
-const float intensity = 1.f;
+const float intensity = 1.0f;
 const int max_depth = 10;
 
-const int num_samples = 900;
-const int image_size = 500;
+const int num_samples = 100;
+const int image_size = 800;
 
 int main()
 {
 	srand(time(nullptr));
+	SimpleTexture white(rgb(1.f, 1.f, 1.f));
 	SimpleTexture red(rgb(1.f, .0f, .0f));
 	SimpleTexture green(rgb(.0f, 1.f, .0f));
 	SimpleTexture blue(rgb(.0f, .0f, 1.f));
 	SimpleTexture gray(rgb(.8f, .8f, .8f));
+	SimpleTexture lightred(rgb(.75f, .25f, .25f));
+
+	SimpleTexture refl(rgb(0.999f));
+	SimpleTexture phong(rgb(16.f));
+
 	ImageTexture image("color.ppm");
 
 	DiffuseMaterial rm(&red);
 	DiffuseMaterial gm(&green);
 	DiffuseMaterial bm(&blue);
+	DiffuseMaterial lrm(&lightred);
 	DiffuseMaterial graym(&gray);
 	DiffuseMaterial im(&image);
+
+	PhongMetalMaterial pmm(&refl, &phong);
 
 	// if delete the parentheses around the constructor, the compiler(VS2017)
 	// would treat the constructor as a declaration. WHY???
@@ -71,8 +81,8 @@ int main()
 
 	Shape *shapes[] = {
 		new Sphere(Vector3(0.f, 10.f, -30.f), 10.f, &em),
-		new UVSphere(Vector3(0.f, -10.f, -30.f), 7.f, &gm),
-		//new Sphere(Vector3(0.f, -50.f, -30.f), 33.f, &bm),
+		new UVSphere(Vector3(0.f, -5.f, -30.f), 5.f, &pmm),
+		new Sphere(Vector3(0.f, -15.f, -30.f), 5.f, &gm),
 
 		new MeshTriangleUV(&mesh, 1, 0, 3, 0),
 		new MeshTriangleUV(&mesh, 2, 1, 3, 0),
@@ -107,7 +117,8 @@ rgb radiance(const BVH &root, Ray &ray, int depth=0)
 		rv += rec.material->EmittedRadiance(rec.uvw, -ray.d, rec.tex_pos, rec.uv);
 		rgb color;
 		Vector3 d;
-		if (rec.material->DiffuseDirection(rec.uvw, ray.d, rec.tex_pos, rec.uv, seed, color, d))
+		if (rec.material->DiffuseDirection(rec.uvw, ray.d, rec.tex_pos, rec.uv, seed, color, d) ||
+			rec.material->SpecularDirection(rec.uvw, ray.d, rec.tex_pos, rec.uv, seed, color, d))
 		{
 			ray.SetOrigin(rec.pos);
 			ray.SetDirection(d);
@@ -156,6 +167,6 @@ void render(const Camera &camera, int image_width, const BVH &root, int nsamples
 	}
 	
 	ofstream outfile(path, ios::binary);
-	image.WritePPM(outfile);
+	image.WritePNG(outfile);
 	outfile.close();
 }

@@ -1,5 +1,6 @@
 #include "Image.h"
 #include <iostream>
+#include "svpng.inc"
 using namespace std;
 
 Image::Image()
@@ -109,3 +110,19 @@ void Image::ReadPPM(string file_name)
 		}
 	in.close();
 }
+
+void Image::WritePNG(ostream &out)
+{
+	unsigned char *data = new unsigned char[width*height * 3];
+	unsigned char *p = data;
+	for(int i = height-1; i>=0; i--)
+		for (int j = 0; j<width; j++)
+		{
+			*p++ = raster[j][i].r*255;
+			*p++ = raster[j][i].g*255;
+			*p++ = raster[j][i].b*255;
+		}
+	svpng(out, width, height, data, 0);
+	delete[] data;
+}
+

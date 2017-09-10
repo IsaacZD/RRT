@@ -16,6 +16,7 @@ public:
 	bool Set(int x, int y, const rgb &color);
 	void GammaCorrect(float gamma);
 	void WritePPM(ostream &out);
+	void WritePNG(ostream &out);
 	void ReadPPM(string file_name);
 	int Width() const { return width; }
 	int Height() const { return height; }

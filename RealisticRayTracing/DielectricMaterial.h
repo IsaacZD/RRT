@@ -27,6 +27,7 @@ public:
 		rgb &_extinction,
 		float &fresnel_scale,
 		Vector3 &transmission) override;
+	virtual bool IsTransmissive() override { return true; }
 
 public:
 	float R0;

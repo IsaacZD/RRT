@@ -21,7 +21,7 @@ public:
 		Vector2 &seed,
 		rgb &,
 		Vector3 &) override;
-
+	virtual bool IsSpecular() override { return true; }
 public:
 	Texture *R;
 	Texture *phong_exp;

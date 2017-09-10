@@ -28,6 +28,8 @@ public:
 		bool &emit,
 		float &scale,
 		Vector3 &direction) override;
+	virtual bool IsDiffuse() override { return true; }
+	virtual bool IsSpecular() override { return true; }
 
 public:
 	float R0;
