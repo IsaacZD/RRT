@@ -28,24 +28,26 @@
 
 void render(const Camera &camera, int width, const BVH &root, int nsamples, char *path);
 
-const Vector3 cc(0.f, 0.f, -30.f);
-const float cl= 20.f;
+const Vector3 cc(0.f, 0.f, -13.f);
+const float cl= 10.f;
 
-const float intensity = 1.0f;
+const float intensity = 5.0f;
 const int max_depth = 10;
 
-const int num_samples = 100;
+const int num_samples = 1600;
 const int image_size = 800;
 
 int main()
 {
 	srand(time(nullptr));
 	SimpleTexture white(rgb(1.f, 1.f, 1.f));
+	SimpleTexture black((rgb()));
 	SimpleTexture red(rgb(1.f, .0f, .0f));
 	SimpleTexture green(rgb(.0f, 1.f, .0f));
 	SimpleTexture blue(rgb(.0f, .0f, 1.f));
-	SimpleTexture gray(rgb(.8f, .8f, .8f));
+	SimpleTexture gray(rgb(.75f));
 	SimpleTexture lightred(rgb(.75f, .25f, .25f));
+	SimpleTexture lightblue(rgb(.25f, .25f, .75f));
 
 	SimpleTexture refl(rgb(0.999f));
 	SimpleTexture phong(rgb(16.f));
@@ -55,8 +57,12 @@ int main()
 	DiffuseMaterial rm(&red);
 	DiffuseMaterial gm(&green);
 	DiffuseMaterial bm(&blue);
+
 	DiffuseMaterial lrm(&lightred);
+	DiffuseMaterial lbm(&lightblue);
+
 	DiffuseMaterial graym(&gray);
+	DiffuseMaterial blackm(&black);
 	DiffuseMaterial im(&image);
 
 	PhongMetalMaterial pmm(&refl, &phong);
@@ -70,19 +76,23 @@ int main()
 	mesh.vertUVs = new VertexUV[8]{
 		{Vector3(cc.x + cl, cc.y + cl, cc.z - cl), Vector2()},
 		{Vector3(cc.x - cl, cc.y + cl, cc.z - cl), Vector2()},
-		{Vector3(cc.x - cl, cc.y + cl, cc.z + 5*cl), Vector2()},
-		{Vector3(cc.x + cl, cc.y + cl, cc.z + 5*cl), Vector2()},
+		{Vector3(cc.x - cl, cc.y + cl, cc.z + 2*cl), Vector2()},
+		{Vector3(cc.x + cl, cc.y + cl, cc.z + 2*cl), Vector2()},
 
 		{Vector3(cc.x + cl, cc.y - cl, cc.z - cl), Vector2()},
 		{Vector3(cc.x - cl, cc.y - cl, cc.z - cl), Vector2()},
-		{Vector3(cc.x - cl, cc.y - cl, cc.z + 5*cl), Vector2()},
-		{Vector3(cc.x + cl, cc.y - cl, cc.z + 5*cl), Vector2()}
+		{Vector3(cc.x - cl, cc.y - cl, cc.z + 2*cl), Vector2()},
+		{Vector3(cc.x + cl, cc.y - cl, cc.z + 2*cl), Vector2()}
 	};
 
 	Shape *shapes[] = {
-		new Sphere(Vector3(0.f, 10.f, -30.f), 10.f, &em),
-		new UVSphere(Vector3(0.f, -5.f, -30.f), 5.f, &pmm),
-		new Sphere(Vector3(0.f, -15.f, -30.f), 5.f, &gm),
+		//new Triangle(Vector3(cc.x-cl/2, cc.y+cl-.00001f, cc.z-cl/2), Vector3(cc.x+cl/2, cc.y+cl-.00001f, cc.z-cl/2), Vector3(cc.x+cl/2, cc.y+cl-.00001f, cc.z+cl/2), &em),
+		//new Triangle(Vector3(cc.x-cl/2, cc.y+cl-.00001f, cc.z-cl/2), Vector3(cc.x+cl/2, cc.y+cl-.00001f, cc.z+cl/2), Vector3(cc.x-cl/2, cc.y+cl-.00001f, cc.z+cl/2), &em),
+
+		//new Sphere(Vector3(0.f, 1250.f+cl-0.01f, cc.z), 1250.f, &em),
+		new Sphere(Vector3(0.f, 5.f, -5), 3.f, &em),
+		new UVSphere(Vector3(-3.f, -5.f, -7.f), 3.f, &pmm),
+		new Sphere(Vector3(3.f, -5.f, -6.f), 3.f, &gm),
 
 		new MeshTriangleUV(&mesh, 1, 0, 3, 0),
 		new MeshTriangleUV(&mesh, 2, 1, 3, 0),
@@ -98,7 +108,7 @@ int main()
 
 	BVH root(shapes, sizeof(shapes)/sizeof(shapes[0]));
 
-	Camera camera(Vector3(0.f, 0.f, -10.f), Vector3(0.f, 0.f, -1.f), Vector3(0.f, 1.f, 0.f), .1f, -20.f, 20.f, -20.f, 20.f, 10.f);
+	Camera camera(Vector3(0.f, 0.f, 7.f), Vector3(0.f, 0.f, -1.f), Vector3(0.f, 1.f, 0.f), .1f, -7.f, 7.f, -7.f, 7.f, 7.f);
 
 	render(camera, image_size, root, num_samples, OUTPUT_PATH);
 
